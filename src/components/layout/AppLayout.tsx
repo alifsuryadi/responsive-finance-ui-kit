@@ -5,6 +5,7 @@ import DashboardContent from './DashboardContent';
 
 const AppLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
     <div className="min-h-screen bg-background">
@@ -17,10 +18,15 @@ const AppLayout = () => {
       )}
       
       {/* Sidebar */}
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <Sidebar 
+        isOpen={sidebarOpen} 
+        onClose={() => setSidebarOpen(false)}
+        isCollapsed={sidebarCollapsed}
+        onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+      />
       
       {/* Main content */}
-      <div className="lg:ml-64">
+      <div className={`transition-all duration-300 ${sidebarCollapsed ? 'lg:ml-16' : 'lg:ml-64'}`}>
         <Header onMenuClick={() => setSidebarOpen(true)} />
         <DashboardContent />
       </div>

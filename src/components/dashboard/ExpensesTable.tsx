@@ -82,107 +82,109 @@ const ExpensesTable = () => {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Наименование
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Поставщик
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Проект
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Фонд
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Категория
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Сотрудник
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Получатель
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Цена Ед Изм
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Кол-во
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Ед. изм
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Сумма оплаты
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Дата оплаты
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Документы
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
-                Настройки
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-card divide-y divide-card-border">
-            {tableData.map((row, index) => (
-              <tr key={index} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">
-                  {row.type}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">
-                  {row.article}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">
-                  {row.project}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">
-                  {row.fund}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">
-                  {row.category}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">
-                  {row.employee}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">
-                  {row.unit}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">
-                  {row.quantity}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">
-                  {row.measure}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">
-                  {row.unitType}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
-                  {row.amount}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">
-                  {row.paymentDate}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">
-                  <span className="text-primary cursor-pointer hover:underline">
-                    {row.documents}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">
-                  <button className="text-text-muted hover:text-text-primary">
-                    ⚙️
-                  </button>
-                </td>
+      <div className="overflow-x-auto -mx-4 sm:mx-0">
+        <div className="min-w-full inline-block align-middle">
+          <table className="w-full min-w-[1200px]">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Наименование
+                </th>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Поставщик
+                </th>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Проект
+                </th>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Фонд
+                </th>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Категория
+                </th>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Сотрудник
+                </th>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Получатель
+                </th>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Цена Ед Изм
+                </th>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Кол-во
+                </th>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Ед. изм
+                </th>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Сумма оплаты
+                </th>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Дата оплаты
+                </th>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Документы
+                </th>
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
+                  Настройки
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="bg-card divide-y divide-card-border">
+              {tableData.map((row, index) => (
+                <tr key={index} className="hover:bg-gray-50">
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-text-primary">
+                    {row.type}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-text-primary">
+                    {row.article}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-text-primary">
+                    {row.project}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-text-primary">
+                    {row.fund}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-text-primary">
+                    {row.category}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-text-primary">
+                    {row.employee}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-text-primary">
+                    {row.unit}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-text-primary">
+                    {row.quantity}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-text-primary">
+                    {row.measure}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-text-primary">
+                    {row.unitType}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-text-primary">
+                    {row.amount}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-text-primary">
+                    {row.paymentDate}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-text-primary">
+                    <span className="text-primary cursor-pointer hover:underline">
+                      {row.documents}
+                    </span>
+                  </td>
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-text-primary">
+                    <button className="text-text-muted hover:text-text-primary">
+                      ⚙️
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

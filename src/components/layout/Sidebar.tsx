@@ -1,12 +1,18 @@
-import { FiMenu, FiBarChart, FiDollarSign, FiCreditCard, FiActivity, FiTarget, FiFolderPlus, FiTrendingUp, FiUsers, FiSettings, FiChevronDown } from 'react-icons/fi';
+import { FiMenu, FiBarChart, FiDollarSign, FiCreditCard, FiActivity, FiTarget, FiFolderPlus, FiTrendingUp, FiUsers, FiSettings, FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { HiOutlineChartBar } from 'react-icons/hi';
+import { useState } from 'react';
+import React from 'react';
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  isCollapsed: boolean;
+  onToggleCollapse: () => void;
 }
 
-const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
+const Sidebar = ({ isOpen, onClose, isCollapsed, onToggleCollapse }: SidebarProps) => {
+  const [technicalExpanded, setTechnicalExpanded] = useState(false);
+  const [hrExpanded, setHrExpanded] = useState(false);
   const menuItems = [
     { icon: FiBarChart, label: 'Транзакции', active: false },
     { icon: FiDollarSign, label: 'Ценовые расходы', active: true },
@@ -35,22 +41,37 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
     { icon: FiFolderPlus, label: 'Статус сотрудников', active: false },
   ];
 
+  // Representative icons for collapsed state
+  const technicalIcon = FiTarget;
+  const hrIcon = FiUsers;
+
   return (
     <>
       {/* Desktop Sidebar */}
-      <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
+      <div className={`hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 transition-all duration-300 ${
+        isCollapsed ? 'lg:w-16' : 'lg:w-64'
+      }`}>
         <div className="flex flex-col flex-grow bg-sidebar-bg overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-4 py-6">
-            <FiMenu className="text-sidebar-foreground text-lg mr-3" />
-            <span className="text-sidebar-foreground font-semibold text-sm">EURASTROY V.1.0</span>
+            <button 
+              onClick={onToggleCollapse}
+              className="text-sidebar-foreground text-lg mr-3 hover:text-sidebar-active-foreground transition-colors"
+            >
+              <FiMenu />
+            </button>
+            {!isCollapsed && (
+              <span className="text-sidebar-foreground font-semibold text-sm">EURASTROY V.1.0</span>
+            )}
           </div>
           
-          <nav className="flex-1 px-2 pb-4 space-y-1">
+          <nav className="flex-1 px-2 pb-4 space-y-1 overflow-y-auto max-h-full">
             {/* Main menu section */}
             <div className="mb-6">
-              <div className="text-sidebar-muted text-xs uppercase tracking-wider mb-3 px-3">
-                ФИНАL СОВНОД АРТАКМЕНТ
-              </div>
+              {!isCollapsed && (
+                <div className="text-sidebar-muted text-xs uppercase tracking-wider mb-3 px-3">
+                  ФИНАL СОВНОД АРТАКМЕНТ
+                </div>
+              )}
               {menuItems.map((item, index) => (
                 <a
                   key={index}
@@ -60,51 +81,98 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                       ? 'bg-sidebar-active text-sidebar-active-foreground'
                       : 'text-sidebar-foreground hover:bg-sidebar-active hover:text-sidebar-active-foreground'
                   }`}
+                  title={isCollapsed ? item.label : undefined}
                 >
-                  <item.icon className="mr-3 h-4 w-4" />
-                  {item.label}
+                  <item.icon className={`h-4 w-4 ${isCollapsed ? 'mx-auto' : 'mr-3'}`} />
+                  {!isCollapsed && item.label}
                 </a>
               ))}
             </div>
 
             {/* Technical section */}
             <div className="mb-6">
-              <div className="flex items-center justify-between px-3 mb-3">
-                <span className="text-sidebar-muted text-xs uppercase tracking-wider">
-                  ТЕХНИЧЕСКИЙ ДЕПАРТАМЕНТ
-                </span>
-                <FiChevronDown className="text-sidebar-muted h-3 w-3" />
-              </div>
-              {technicalItems.map((item, index) => (
+              {isCollapsed ? (
                 <a
-                  key={index}
                   href="#"
                   className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-sidebar-foreground hover:bg-sidebar-active hover:text-sidebar-active-foreground transition-colors"
+                  title="ТЕХНИЧЕСКИЙ ДЕПАРТАМЕНТ"
                 >
-                  <item.icon className="mr-3 h-4 w-4" />
-                  {item.label}
+                  {React.createElement(technicalIcon, { className: "h-4 w-4 mx-auto" })}
                 </a>
-              ))}
+              ) : (
+                <>
+                  <button
+                    onClick={() => setTechnicalExpanded(!technicalExpanded)}
+                    className="flex items-center justify-between w-full px-3 mb-3 text-sidebar-muted hover:text-sidebar-foreground transition-colors"
+                  >
+                    <span className="text-xs uppercase tracking-wider">
+                      ТЕХНИЧЕСКИЙ ДЕПАРТАМЕНТ
+                    </span>
+                    {technicalExpanded ? (
+                      <FiChevronDown className="h-3 w-3" />
+                    ) : (
+                      <FiChevronRight className="h-3 w-3" />
+                    )}
+                  </button>
+                  {technicalExpanded && (
+                    <div className="space-y-1">
+                      {technicalItems.map((item, index) => (
+                        <a
+                          key={index}
+                          href="#"
+                          className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-sidebar-foreground hover:bg-sidebar-active hover:text-sidebar-active-foreground transition-colors"
+                        >
+                          <item.icon className="mr-3 h-4 w-4" />
+                          {item.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </>
+              )}
             </div>
 
             {/* HR section */}
             <div className="mb-6">
-              <div className="flex items-center justify-between px-3 mb-3">
-                <span className="text-sidebar-muted text-xs uppercase tracking-wider">
-                  НР ДЕПАРТАМЕНТ
-                </span>
-                <FiChevronDown className="text-sidebar-muted h-3 w-3" />
-              </div>
-              {hrItems.map((item, index) => (
+              {isCollapsed ? (
                 <a
-                  key={index}
                   href="#"
                   className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-sidebar-foreground hover:bg-sidebar-active hover:text-sidebar-active-foreground transition-colors"
+                  title="НР ДЕПАРТАМЕНТ"
                 >
-                  <item.icon className="mr-3 h-4 w-4" />
-                  {item.label}
+                  {React.createElement(hrIcon, { className: "h-4 w-4 mx-auto" })}
                 </a>
-              ))}
+              ) : (
+                <>
+                  <button
+                    onClick={() => setHrExpanded(!hrExpanded)}
+                    className="flex items-center justify-between w-full px-3 mb-3 text-sidebar-muted hover:text-sidebar-foreground transition-colors"
+                  >
+                    <span className="text-xs uppercase tracking-wider">
+                      НР ДЕПАРТАМЕНТ
+                    </span>
+                    {hrExpanded ? (
+                      <FiChevronDown className="h-3 w-3" />
+                    ) : (
+                      <FiChevronRight className="h-3 w-3" />
+                    )}
+                  </button>
+                  {hrExpanded && (
+                    <div className="space-y-1">
+                      {hrItems.map((item, index) => (
+                        <a
+                          key={index}
+                          href="#"
+                          className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-sidebar-foreground hover:bg-sidebar-active hover:text-sidebar-active-foreground transition-colors"
+                        >
+                          <item.icon className="mr-3 h-4 w-4" />
+                          {item.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </>
+              )}
             </div>
           </nav>
         </div>
@@ -126,7 +194,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           </div>
           
           <nav className="flex-1 px-2 pb-4 space-y-1 overflow-y-auto">
-            {/* Same menu structure as desktop */}
+            {/* Main menu section */}
             <div className="mb-6">
               <div className="text-sidebar-muted text-xs uppercase tracking-wider mb-3 px-3">
                 ФИНАL СОВНОД АРТАКМЕНТ
@@ -146,6 +214,70 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                   {item.label}
                 </a>
               ))}
+            </div>
+
+            {/* Technical section */}
+            <div className="mb-6">
+              <button
+                onClick={() => setTechnicalExpanded(!technicalExpanded)}
+                className="flex items-center justify-between w-full px-3 mb-3 text-sidebar-muted hover:text-sidebar-foreground transition-colors"
+              >
+                <span className="text-xs uppercase tracking-wider">
+                  ТЕХНИЧЕСКИЙ ДЕПАРТАМЕНТ
+                </span>
+                {technicalExpanded ? (
+                  <FiChevronDown className="h-3 w-3" />
+                ) : (
+                  <FiChevronRight className="h-3 w-3" />
+                )}
+              </button>
+              {technicalExpanded && (
+                <div className="space-y-1">
+                  {technicalItems.map((item, index) => (
+                    <a
+                      key={index}
+                      href="#"
+                      onClick={onClose}
+                      className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-sidebar-foreground hover:bg-sidebar-active hover:text-sidebar-active-foreground transition-colors"
+                    >
+                      <item.icon className="mr-3 h-4 w-4" />
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* HR section */}
+            <div className="mb-6">
+              <button
+                onClick={() => setHrExpanded(!hrExpanded)}
+                className="flex items-center justify-between w-full px-3 mb-3 text-sidebar-muted hover:text-sidebar-foreground transition-colors"
+              >
+                <span className="text-xs uppercase tracking-wider">
+                  НР ДЕПАРТАМЕНТ
+                </span>
+                {hrExpanded ? (
+                  <FiChevronDown className="h-3 w-3" />
+                ) : (
+                  <FiChevronRight className="h-3 w-3" />
+                )}
+              </button>
+              {hrExpanded && (
+                <div className="space-y-1">
+                  {hrItems.map((item, index) => (
+                    <a
+                      key={index}
+                      href="#"
+                      onClick={onClose}
+                      className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-sidebar-foreground hover:bg-sidebar-active hover:text-sidebar-active-foreground transition-colors"
+                    >
+                      <item.icon className="mr-3 h-4 w-4" />
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           </nav>
         </div>
