@@ -1,73 +1,53 @@
-# Welcome to your Lovable project
+# Proyek Dashboard Keuangan - React & Tailwind CSS
 
-## Project info
+Ini adalah proyek antarmuka pengguna (frontend) yang dibangun menggunakan React dan Tailwind CSS. Tujuan dari proyek ini adalah untuk menampilkan data keuangan dan proyek secara visual melalui serangkaian komponen dashboard yang informatif dan terstruktur dengan baik.
 
-**URL**: https://lovable.dev/projects/9c15b16d-66f5-4674-aad5-12b7b058f626
+## Tampilan Dashboard
 
-## How can I edit this code?
+![screenshot](./public/preview.webp)
 
-There are several ways of editing your application.
+## Fitur Utama
 
-**Use Lovable**
+- **Tabel Transaksi Interaktif**: Menampilkan data pengeluaran dengan fitur filter, sorting (implied), dan aksi per baris.
+- **Ringkasan KPI (Key Performance Indicator)**: Panel yang menampilkan metrik-metrik kunci performa bisnis dalam format yang mudah dibaca.
+- **Kartu Proyek Dinamis**: Kartu ringkasan untuk setiap proyek yang menunjukkan progres, detail kontrak, dan statistik keuangan.
+- **Desain Responsif**: Komponen dirancang untuk bekerja dengan baik di perangkat desktop maupun seluler.
+- **Arsitektur Komponen yang Reusable**: Dibuat dengan prinsip komposisi untuk kemudahan pemeliharaan dan skalabilitas.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/9c15b16d-66f5-4674-aad5-12b7b058f626) and start prompting.
+## Teknologi yang Digunakan
 
-Changes made via Lovable will be committed automatically to this repo.
+- **[React](https://reactjs.org/)**: Library JavaScript untuk membangun antarmuka pengguna.
+- **[Tailwind CSS](https://tailwindcss.com/)**: Framework CSS utility-first untuk desain yang cepat dan kustom.
+- **[React Icons](https://react-icons.github.io/react-icons/)**: Library untuk menyertakan ikon populer dalam proyek React.
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Memulai Proyek
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Untuk menjalankan proyek ini di lingkungan lokal Anda, ikuti langkah-langkah berikut:
 
-Follow these steps:
+1.  **Clone repository ini:**
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+    ```sh
+    git clone https://github.com/alifsuryadi/responsive-finance-ui-kit.git
+    ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2.  **Masuk ke direktori proyek:**
 
-# Step 3: Install the necessary dependencies.
-npm i
+    ```sh
+    cd responsive-finance-ui-kit
+    ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+3.  **Instal semua dependensi yang dibutuhkan:**
 
-**Edit a file directly in GitHub**
+    ```sh
+    npm install
+    ```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+4.  **Jalankan aplikasi dalam mode pengembangan:**
+    ```sh
+    npm run dev
+    ```
+    > Buka [http://localhost:8080](http://localhost:8080) untuk melihatnya di browser.
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/9c15b16d-66f5-4674-aad5-12b7b058f626) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+---
