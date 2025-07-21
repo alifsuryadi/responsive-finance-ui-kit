@@ -1,67 +1,182 @@
-import { FiChevronDown, FiDollarSign, FiTrendingUp, FiTarget, FiBarChart } from 'react-icons/fi';
+import { useState } from 'react';
+import { FiChevronDown, FiDollarSign, FiTrendingUp, FiTarget, FiBarChart, FiFilter, FiCreditCard } from 'react-icons/fi';
 
 const KpiSection = () => {
-  const kpiData = [
+  const [activeTab, setActiveTab] = useState('expenses');
+
+  const tabs = [
+    { id: 'expenses', label: 'Расходы', active: true },
+    { id: 'replenishment', label: 'Пополнение', active: false },
+    { id: 'create', label: 'Создать проект', active: false },
+  ];
+
+  const leftColumnData = [
     { label: 'Всего контрактов на сумму', value: '5 278 000 000 Rp', icon: FiDollarSign },
     { label: 'Всего оплачено клиентами', value: '320 000 000 Rp', icon: FiTrendingUp },
-    { label: 'Всего прочих расходов', value: '3 680 000 000 Rp', icon: FiBarChart },
+    { label: 'Всего прямых расходов', value: '3 680 000 000 Rp', icon: FiBarChart },
     { label: 'Всего валовой прибыли', value: '1 598 000 000 Rp', icon: FiTarget },
-    { label: 'Баланс клиентов', value: '1 598 000 000 Rp', icon: FiDollarSign },
+  ];
+
+  const middleColumnData = [
+    { label: 'Баланс клиентов', value: '1 598 000 000 Rp', icon: FiCreditCard },
     { label: 'Баланс компании', value: '5 278 000 000 Rp', icon: FiTrendingUp },
-    { label: 'Баланс компании в кредитном', value: '6 876 000 000 Rp', icon: FiBarChart },
+    { label: 'Баланс компании и клиентов', value: '6 876 000 000 Rp', icon: FiBarChart },
     { label: 'Баланс в банке', value: '6 870 000 000 Rp', icon: FiTarget },
   ];
 
-  const summaryStats = [
-    { label: 'Разница баланса', value: '0 Rp', change: 0 },
-    { label: 'Выберем по сумму', value: '7 560 000 000 Rp', change: 0 },
-    { label: 'Выберем фильтр по сумму', value: '12 600 000 000 Rp', change: 1.119, positive: true },
+  const rightColumnData = [
+    { label: 'Разница баланса', value: '0 Rp', icon: FiTarget },
+    { label: 'Выбрано на сумму', value: '7 560 000 000 Rp', icon: FiBarChart },
+    { label: 'Выбран фильтр на сумму', value: '12 600 000 000 Rp', icon: FiFilter, change: '+1.119%', positive: true },
+    { label: 'Выполненный объем по 10-дневной статистике', value: '1 319 500 000 Rp', percentage: '25%', icon: FiBarChart },
   ];
 
   return (
     <div className="mb-8">
-      {/* Period Selector */}
+      {/* Tabs */}
       <div className="mb-6">
-        <button className="flex items-center space-x-2 bg-card border border-card-border rounded-md px-4 py-2 text-sm font-medium text-text-primary hover:bg-gray-50">
-          <span>Период</span>
-          <FiChevronDown className="h-4 w-4" />
-        </button>
+        <div className="flex flex-wrap gap-2 bg-muted rounded-lg p-1">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                activeTab === tab.id
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* KPI Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
-        {kpiData.map((kpi, index) => (
-          <div key={index} className="bg-card border border-card-border rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-gray-100 rounded-lg">
-                <kpi.icon className="h-4 w-4 text-text-secondary" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-xs text-text-muted mb-1">{kpi.label}</div>
-                <div className="text-sm font-semibold text-text-primary truncate">{kpi.value}</div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Summary Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {summaryStats.map((stat, index) => (
-          <div key={index} className="bg-card border border-card-border rounded-lg p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-xs text-text-muted mb-1">{stat.label}</div>
-                <div className="text-sm font-semibold text-text-primary">{stat.value}</div>
-              </div>
-              {stat.change !== 0 && (
-                <div className={`text-xs font-medium ${stat.positive ? 'text-success' : 'text-danger'}`}>
-                  {stat.positive ? '+' : ''}{stat.change}%
+      {/* Table Layout */}
+      <div className="bg-card rounded-lg border border-card-border overflow-hidden">
+        {/* Mobile View */}
+        <div className="block lg:hidden">
+          <div className="space-y-4 p-4">
+            {/* Left Column Data */}
+            <div className="space-y-3">
+              {leftColumnData.map((item, index) => (
+                <div key={index} className="flex items-center justify-between py-2 border-b border-card-border last:border-b-0">
+                  <div className="flex items-center space-x-3">
+                    <item.icon className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">{item.label}</span>
+                  </div>
+                  <span className="text-sm font-semibold text-foreground">{item.value}</span>
                 </div>
-              )}
+              ))}
+            </div>
+            
+            {/* Middle Column Data */}
+            <div className="space-y-3 pt-4 border-t border-card-border">
+              {middleColumnData.map((item, index) => (
+                <div key={index} className="flex items-center justify-between py-2 border-b border-card-border last:border-b-0">
+                  <div className="flex items-center space-x-3">
+                    <item.icon className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">{item.label}</span>
+                  </div>
+                  <span className="text-sm font-semibold text-foreground">{item.value}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Right Column Data */}
+            <div className="space-y-3 pt-4 border-t border-card-border">
+              {rightColumnData.map((item, index) => (
+                <div key={index} className="flex items-center justify-between py-2 border-b border-card-border last:border-b-0">
+                  <div className="flex items-center space-x-3">
+                    <item.icon className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">{item.label}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-semibold text-foreground">{item.value}</span>
+                    {item.change && (
+                      <span className={`text-xs font-medium ${item.positive ? 'text-success' : 'text-destructive'}`}>
+                        {item.change}
+                      </span>
+                    )}
+                    {item.percentage && (
+                      <div className="flex items-center space-x-1">
+                        <span className="text-xs text-muted-foreground">{item.percentage}</span>
+                        <div className="w-12 h-1 bg-muted rounded-full">
+                          <div className="w-1/4 h-1 bg-success rounded-full"></div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+        </div>
+
+        {/* Desktop View */}
+        <div className="hidden lg:block">
+          <div className="grid grid-cols-3 divide-x divide-card-border">
+            {/* Left Column */}
+            <div className="p-6">
+              <div className="space-y-4">
+                {leftColumnData.map((item, index) => (
+                  <div key={index} className="flex items-center justify-between py-3">
+                    <div className="flex items-center space-x-3">
+                      <item.icon className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm text-muted-foreground">{item.label}</span>
+                    </div>
+                    <span className="text-sm font-semibold text-foreground">{item.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Middle Column */}
+            <div className="p-6">
+              <div className="space-y-4">
+                {middleColumnData.map((item, index) => (
+                  <div key={index} className="flex items-center justify-between py-3">
+                    <div className="flex items-center space-x-3">
+                      <item.icon className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm text-muted-foreground">{item.label}</span>
+                    </div>
+                    <span className="text-sm font-semibold text-foreground">{item.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Column */}
+            <div className="p-6">
+              <div className="space-y-4">
+                {rightColumnData.map((item, index) => (
+                  <div key={index} className="flex items-center justify-between py-3">
+                    <div className="flex items-center space-x-3">
+                      <item.icon className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm text-muted-foreground">{item.label}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm font-semibold text-foreground">{item.value}</span>
+                      {item.change && (
+                        <span className={`text-xs font-medium ${item.positive ? 'text-success' : 'text-destructive'}`}>
+                          {item.change}
+                        </span>
+                      )}
+                      {item.percentage && (
+                        <div className="flex items-center space-x-2">
+                          <span className="text-xs text-muted-foreground">{item.percentage}</span>
+                          <div className="w-16 h-2 bg-muted rounded-full">
+                            <div className="w-1/4 h-2 bg-success rounded-full"></div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
