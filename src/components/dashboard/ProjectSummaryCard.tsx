@@ -114,14 +114,14 @@ const ProjectSummaryCard = ({
       </div>
 
       {/* Action Buttons */}
-      <div className="flex space-x-2 mt-6 pt-4 border-t border-card-border">
-        <button className="flex-1 bg-primary text-primary-foreground py-2 px-4 rounded-md text-sm font-medium hover:bg-primary-hover transition-colors">
+      <div className="flex flex-col sm:flex-row gap-2 mt-6 pt-4 border-t border-card-border">
+        <button className="flex-1 bg-primary text-primary-foreground py-2 px-3 rounded-md text-xs sm:text-sm font-medium hover:bg-primary-hover transition-colors">
           Расходы
         </button>
-        <button className="flex-1 bg-button-secondary text-button-secondary-foreground py-2 px-4 rounded-md text-sm font-medium hover:bg-gray-200 transition-colors">
+        <button className="flex-1 bg-button-secondary text-button-secondary-foreground py-2 px-3 rounded-md text-xs sm:text-sm font-medium hover:bg-gray-200 transition-colors">
           Подпроекты
         </button>
-        <button className="flex-1 bg-button-secondary text-button-secondary-foreground py-2 px-4 rounded-md text-sm font-medium hover:bg-gray-200 transition-colors">
+        <button className="flex-1 bg-button-secondary text-button-secondary-foreground py-2 px-3 rounded-md text-xs sm:text-sm font-medium hover:bg-gray-200 transition-colors">
           Создать проект
         </button>
       </div>

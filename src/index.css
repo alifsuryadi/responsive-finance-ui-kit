@@ -128,3 +128,28 @@
     @apply bg-background text-foreground font-inter;
   }
 }
+
+@layer components {
+  /* Custom scrollbar for sidebar */
+  .sidebar-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--sidebar-bg)) hsl(var(--sidebar-bg));
+  }
+  
+  .sidebar-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .sidebar-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--sidebar-bg));
+  }
+  
+  .sidebar-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--sidebar-bg));
+    border-radius: 3px;
+  }
+  
+  .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--sidebar-muted));
+  }
+}

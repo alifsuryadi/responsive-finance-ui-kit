@@ -11,6 +11,7 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isOpen, onClose, isCollapsed, onToggleCollapse }: SidebarProps) => {
+  const [mainMenuExpanded, setMainMenuExpanded] = useState(true);
   const [technicalExpanded, setTechnicalExpanded] = useState(false);
   const [hrExpanded, setHrExpanded] = useState(false);
   const menuItems = [
@@ -64,29 +65,52 @@ const Sidebar = ({ isOpen, onClose, isCollapsed, onToggleCollapse }: SidebarProp
             )}
           </div>
           
-          <nav className="flex-1 px-2 pb-4 space-y-1 overflow-y-auto max-h-full">
+          <nav className="flex-1 px-2 pb-4 space-y-1 overflow-y-auto max-h-full sidebar-scrollbar">
             {/* Main menu section */}
             <div className="mb-6">
-              {!isCollapsed && (
-                <div className="text-sidebar-muted text-xs uppercase tracking-wider mb-3 px-3">
-                  ФИНАL СОВНОД АРТАКМЕНТ
-                </div>
-              )}
-              {menuItems.map((item, index) => (
+              {isCollapsed ? (
                 <a
-                  key={index}
                   href="#"
-                  className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                    item.active
-                      ? 'bg-sidebar-active text-sidebar-active-foreground'
-                      : 'text-sidebar-foreground hover:bg-sidebar-active hover:text-sidebar-active-foreground'
-                  }`}
-                  title={isCollapsed ? item.label : undefined}
+                  className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-sidebar-foreground hover:bg-sidebar-active hover:text-sidebar-active-foreground transition-colors"
+                  title="ФИНАL СОВНОД АРТАКМЕНТ"
                 >
-                  <item.icon className={`h-4 w-4 ${isCollapsed ? 'mx-auto' : 'mr-3'}`} />
-                  {!isCollapsed && item.label}
+                  <FiBarChart className="h-4 w-4 mx-auto" />
                 </a>
-              ))}
+              ) : (
+                <>
+                  <button
+                    onClick={() => setMainMenuExpanded(!mainMenuExpanded)}
+                    className="flex items-center justify-between w-full px-3 mb-3 text-sidebar-muted hover:text-sidebar-foreground transition-colors"
+                  >
+                    <span className="text-xs uppercase tracking-wider">
+                      ФИНАL СОВНОД АРТАКМЕНТ
+                    </span>
+                    {mainMenuExpanded ? (
+                      <FiChevronDown className="h-3 w-3" />
+                    ) : (
+                      <FiChevronRight className="h-3 w-3" />
+                    )}
+                  </button>
+                  {mainMenuExpanded && (
+                    <div className="space-y-1">
+                      {menuItems.map((item, index) => (
+                        <a
+                          key={index}
+                          href="#"
+                          className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                            item.active
+                              ? 'bg-sidebar-active text-sidebar-active-foreground'
+                              : 'text-sidebar-foreground hover:bg-sidebar-active hover:text-sidebar-active-foreground'
+                          }`}
+                        >
+                          <item.icon className="mr-3 h-4 w-4" />
+                          {item.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </>
+              )}
             </div>
 
             {/* Technical section */}
@@ -193,27 +217,41 @@ const Sidebar = ({ isOpen, onClose, isCollapsed, onToggleCollapse }: SidebarProp
             </button>
           </div>
           
-          <nav className="flex-1 px-2 pb-4 space-y-1 overflow-y-auto">
+          <nav className="flex-1 px-2 pb-4 space-y-1 overflow-y-auto sidebar-scrollbar">
             {/* Main menu section */}
             <div className="mb-6">
-              <div className="text-sidebar-muted text-xs uppercase tracking-wider mb-3 px-3">
-                ФИНАL СОВНОД АРТАКМЕНТ
-              </div>
-              {menuItems.map((item, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  onClick={onClose}
-                  className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                    item.active
-                      ? 'bg-sidebar-active text-sidebar-active-foreground'
-                      : 'text-sidebar-foreground hover:bg-sidebar-active hover:text-sidebar-active-foreground'
-                  }`}
-                >
-                  <item.icon className="mr-3 h-4 w-4" />
-                  {item.label}
-                </a>
-              ))}
+              <button
+                onClick={() => setMainMenuExpanded(!mainMenuExpanded)}
+                className="flex items-center justify-between w-full px-3 mb-3 text-sidebar-muted hover:text-sidebar-foreground transition-colors"
+              >
+                <span className="text-xs uppercase tracking-wider">
+                  ФИНАL СОВНОД АРТАКМЕНТ
+                </span>
+                {mainMenuExpanded ? (
+                  <FiChevronDown className="h-3 w-3" />
+                ) : (
+                  <FiChevronRight className="h-3 w-3" />
+                )}
+              </button>
+              {mainMenuExpanded && (
+                <div className="space-y-1">
+                  {menuItems.map((item, index) => (
+                    <a
+                      key={index}
+                      href="#"
+                      onClick={onClose}
+                      className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                        item.active
+                          ? 'bg-sidebar-active text-sidebar-active-foreground'
+                          : 'text-sidebar-foreground hover:bg-sidebar-active hover:text-sidebar-active-foreground'
+                      }`}
+                    >
+                      <item.icon className="mr-3 h-4 w-4" />
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Technical section */}

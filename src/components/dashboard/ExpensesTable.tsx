@@ -46,30 +46,32 @@ const ExpensesTable = () => {
   return (
     <div className="bg-card rounded-lg border border-card-border">
       {/* Header */}
-      <div className="p-6 border-b border-card-border">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+      <div className="p-4 sm:p-6 border-b border-card-border">
+        <div className="flex flex-col space-y-4">
           <h2 className="text-lg font-semibold text-card-foreground">Прямые расходы</h2>
-          <div className="flex items-center space-x-3">
-            <button className="bg-button-success text-button-success-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-green-600 transition-colors">
+          
+          {/* Action buttons */}
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+            <button className="bg-button-success text-button-success-foreground px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium hover:bg-green-600 transition-colors">
               Создать транзакцию
             </button>
-            <button className="flex items-center space-x-2 bg-button-secondary text-button-secondary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-200 transition-colors">
-              <FiDownload className="h-4 w-4" />
+            <button className="flex items-center justify-center space-x-2 bg-button-secondary text-button-secondary-foreground px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium hover:bg-gray-200 transition-colors">
+              <FiDownload className="h-3 w-3 sm:h-4 sm:w-4" />
               <span>ЭКСПОРТ</span>
             </button>
-            <button className="flex items-center space-x-2 bg-button-secondary text-button-secondary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-200 transition-colors">
-              <FiUpload className="h-4 w-4" />
+            <button className="flex items-center justify-center space-x-2 bg-button-secondary text-button-secondary-foreground px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium hover:bg-gray-200 transition-colors">
+              <FiUpload className="h-3 w-3 sm:h-4 sm:w-4" />
               <span>ИМПОРТ</span>
             </button>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex space-x-6 mt-4">
+        <div className="flex flex-wrap gap-4 sm:gap-6 mt-4 overflow-x-auto">
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              className={`pb-2 text-sm font-medium border-b-2 transition-colors ${
+              className={`pb-2 text-xs sm:text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                 tab.active
                   ? 'border-primary text-primary'
                   : 'border-transparent text-text-secondary hover:text-text-primary'
@@ -82,7 +84,7 @@ const ExpensesTable = () => {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto -mx-4 sm:mx-0">
+      <div className="overflow-x-auto">
         <div className="min-w-full inline-block align-middle">
           <table className="w-full min-w-[1200px]">
             <thead className="bg-gray-50">
