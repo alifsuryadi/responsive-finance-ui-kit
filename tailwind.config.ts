@@ -36,6 +36,14 @@ export default {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
 				},
+				success: {
+					DEFAULT: 'hsl(var(--success))',
+					foreground: 'hsl(var(--success-foreground))'
+				},
+				warning: {
+					DEFAULT: 'hsl(var(--warning))',
+					foreground: 'hsl(var(--warning-foreground))'
+				},
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',
 					foreground: 'hsl(var(--muted-foreground))'
@@ -61,6 +69,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				financial: {
+					dark: 'hsl(var(--financial-dark))',
+					darker: 'hsl(var(--financial-darker))',
+					light: 'hsl(var(--financial-light))',
+					accent: 'hsl(var(--financial-accent))',
+					success: 'hsl(var(--financial-success))',
+					'text-primary': 'hsl(var(--financial-text-primary))',
+					'text-secondary': 'hsl(var(--financial-text-secondary))'
 				}
 			},
 			borderRadius: {
